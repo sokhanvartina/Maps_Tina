@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "595216413074",
+    "firebase_url": "https://grocery-run.firebaseio.com",
+    "project_id": "grocery-run",
+    "storage_bucket": "grocery-run.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595216413074:android:efdc92a9ea96737b57514b",
+        "android_client_info": {
+          "package_name": "com.example.groceryrun"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "595216413074-9ci07s77v48kjsj60u7936enbtf7ld94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8RSHLU9M_7e5Qs5LN9COc-Tne9c8B7fk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "595216413074-9ci07s77v48kjsj60u7936enbtf7ld94.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
