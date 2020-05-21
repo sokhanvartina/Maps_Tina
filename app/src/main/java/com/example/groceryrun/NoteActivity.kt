@@ -1,48 +1,81 @@
 package com.example.groceryrun
 
+//import android.R
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_note.*
 
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
 class NoteActivity : AppCompatActivity() {
     private val TAG: String? = "NoteActivity"
-    private var mDatabase: DatabaseReference? = null
-    //private var addClickCount = 0;
+    // hashmap storing item, quantity, removeButton name, findButtonName
+    private var map : HashMap<String, Int> = HashMap<String, Int> ()
+    private var count = 2000    // start at 2000 just in case some previous ones were already initialized
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note)
 
         // [START initialize_database_ref]
-        mDatabase = FirebaseDatabase.getInstance().getReference()
+        //mDatabase = FirebaseDatabase.getInstance().getReference()
     }
 
-    fun basicReadWrite() {
-        // Write a message to the database
-        val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("message")
-        myRef.setValue("Hello, World!")
+    fun saveItem(view: View) {
+        try {     // save item to hashmap and create new spot for entering data, if that slot is filled out properly
+            map.put(
+                enterItem.getText().toString(),
+                Integer.parseInt(enterQuantity.getText().toString())
+            )
+            var msg = enterItem.getText().toString() + ", " + enterQuantity.getText().toString()
+            Log.i("New item saved: ", msg)
 
-        // Read from the database
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                val value = dataSnapshot.getValue(String::class.java)
-                Log.d(TAG, "Value is: $value")
-            }
+            // add new linear layout for edit text
+            val parent = findViewById(R.id.mainList) as LinearLayout
+            val ll = LinearLayout(this)
+            ll.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT)
+            ll.orientation = LinearLayout.HORIZONTAL
 
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException())
-            }
-        })
+            val tv = TextView(this)
+            tv.setText(enterItem.getText().toString() + " x " + enterQuantity.getText().toString())
+
+            val removeButton = Button(this)
+            removeButton.text = "Remove Item"
+            removeButton.id = count
+            removeButton.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(view: View) {
+                    removeClicked(view)
+                }
+            })
+
+            val findButton = Button(this)
+            findButton.text = "Find Item"
+            findButton.id = count + 1
+
+            // increment count by 2
+            // even ids are removeButtons, odd are findButtons
+            count+=2
+
+            ll.addView(tv)
+            ll.addView(removeButton)
+            ll.addView(findButton)
+            parent.addView(ll)
+
+            // erase edittext text
+            enterItem.getText().clear()
+            enterQuantity.getText().clear()
+        }
+        catch (e: Exception){}
+    }
+
+    fun removeClicked (view: View){
+        (view.parent.parent as ViewGroup).removeView(view.parent as ViewGroup)
     }
 
     companion object {
