@@ -62,13 +62,12 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/enterItem"
-                    android:layout_width="wrap_content"
+                    android:layout_width="249dp"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/enteritem"
-                    android:inputType="textPersonName" />
+                    android:layout_weight="1"
+                    android:hint="@string/enteritem" />
 
                 <TextView
                     android:id="@+id/x"
@@ -76,14 +75,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/x" />
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/enterQuantity"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="@string/quantity"
-                    android:inputType="number" />
+                    android:hint="@string/quantity" />
 
             </LinearLayout>
 

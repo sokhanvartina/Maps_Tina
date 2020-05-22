@@ -1,6 +1,5 @@
 package com.example.groceryrun
 
-//import android.R
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,7 +10,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_note.*
 
-
 class NoteActivity : AppCompatActivity() {
     private val TAG: String? = "NoteActivity"
     // hashmap storing item, quantity, removeButton name, findButtonName
@@ -21,13 +19,13 @@ class NoteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note)
-
-        // [START initialize_database_ref]
-        //mDatabase = FirebaseDatabase.getInstance().getReference()
     }
 
-    fun saveItem(view: View) {
-        try {     // save item to hashmap and create new spot for entering data, if that slot is filled out properly
+    fun saveItem(view: View) {     // for when a new item is added
+        if (enterItem.getText().toString()=="" || enterQuantity.getText().toString()==""){
+            // errortrap
+        }
+        else {     // save item to hashmap and create new spot for entering data, if that slot is filled out properly
             map.put(
                 enterItem.getText().toString(),
                 Integer.parseInt(enterQuantity.getText().toString())
@@ -71,7 +69,6 @@ class NoteActivity : AppCompatActivity() {
             enterItem.getText().clear()
             enterQuantity.getText().clear()
         }
-        catch (e: Exception){}
     }
 
     fun removeClicked (view: View){
