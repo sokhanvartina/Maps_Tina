@@ -22,15 +22,15 @@ class NoteActivity : AppCompatActivity() {
     }
 
     fun saveItem(view: View) {     // for when a new item is added
-        if (enterItem.getText().toString()=="" || enterQuantity.getText().toString()==""){
+        if (enterItem.getText().toString()==""){
             // errortrap
         }
         else {     // save item to hashmap and create new spot for entering data, if that slot is filled out properly
             map.put(
                 enterItem.getText().toString(),
-                Integer.parseInt(enterQuantity.getText().toString())
+                1
             )
-            var msg = enterItem.getText().toString() + ", " + enterQuantity.getText().toString()
+            var msg = enterItem.getText().toString()
             Log.i("New item saved: ", msg)
 
             // add new linear layout for edit text
@@ -41,7 +41,7 @@ class NoteActivity : AppCompatActivity() {
             ll.orientation = LinearLayout.HORIZONTAL
 
             val tv = TextView(this)
-            tv.setText(enterItem.getText().toString() + " x " + enterQuantity.getText().toString())
+            tv.setText(enterItem.getText().toString())
 
             val removeButton = Button(this)
             removeButton.text = "Remove Item"
@@ -67,7 +67,6 @@ class NoteActivity : AppCompatActivity() {
 
             // erase edittext text
             enterItem.getText().clear()
-            enterQuantity.getText().clear()
         }
     }
 
